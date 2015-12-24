@@ -1,63 +1,165 @@
-<?php
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Fazer nav-tab avançar e voltar</title>
 
-/**
- * Laravel - A PHP Framework For Web Artisans
- *
- * @package  Laravel
- * @author   Taylor Otwell <taylorotwell@gmail.com>
- */
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-/*
-|--------------------------------------------------------------------------
-| Register The Auto Loader
-|--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader for
-| our application. We just need to utilize it! We'll simply require it
-| into the script here so that we don't have to worry about manual
-| loading any of our classes later on. It feels nice to relax.
-|
-*/
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    
+<script>
+    function avancar() {
+        
+        //Pega as classes das li do nav-tab
+        var classeTab1 = $('#tab1').attr('class');
+        var classeTab2 = $('#tab2').attr('class');
+        
+        //se a classe da li com o id tab1 for igual a active
+        if(classeTab1 == "active")
+        {  
+            //Movimentação das tabs
+            //retira a classe ativa de tab1
+            document.getElementById("tab1").className = "";
+            //coloca a classe de tab2 como ativa
+            document.getElementById("tab2").className = "active";
 
-require __DIR__.'/../bootstrap/autoload.php';
+            //Movimentação do conteudo
+            document.getElementById("tab01").className = "tab-pane";
+            document.getElementById("tab02").className = "tab-pane active";
 
-/*
-|--------------------------------------------------------------------------
-| Turn On The Lights
-|--------------------------------------------------------------------------
-|
-| We need to illuminate PHP development, so let us turn on the lights.
-| This bootstraps the framework and gets it ready for use, then it
-| will load up this application so that we can run it and send
-| the responses back to the browser and delight our users.
-|
-*/
+        }
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+       
+        if(classeTab2 == "active")
+        {
+           document.getElementById("tab2").className = "";
+            document.getElementById("tab3").className = "active";
 
-/*
-|--------------------------------------------------------------------------
-| Run The Application
-|--------------------------------------------------------------------------
-|
-| Once we have the application, we can handle the incoming request
-| through the kernel, and send the associated response back to
-| the client's browser allowing them to enjoy the creative
-| and wonderful application we have prepared for them.
-|
-*/
+            document.getElementById("tab02").className = "tab-pane";
+            document.getElementById("tab03").className = "tab-pane active";
 
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+        }
 
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
+    }
 
-$response->send();
+  function voltar() {
+        
 
-$kernel->terminate($request, $response);
+        var classeTab2 = $('#tab2').attr('class');
+        var classeTab3 = $('#tab3').attr('class');
+        
+             
+        if(classeTab2 == "active")
+        {
+           document.getElementById("tab2").className = "";
+            document.getElementById("tab1").className = "active";
+
+            document.getElementById("tab02").className = "tab-pane";
+            document.getElementById("tab01").className = "tab-pane active";
+
+        }
+
+        if(classeTab3 == "active")
+        {  
+
+            document.getElementById("tab3").className = "";
+            document.getElementById("tab2").className = "active";
+
+            document.getElementById("tab03").className = "tab-pane";
+            document.getElementById("tab02").className = "tab-pane active";
+
+        }
+
+    }   
+</script>
 
 
+  <div class="container">
+        
+        <div class="span12">
+    
+                <div id="formulario" >
+                    <ul id="tabsMenu" class="nav nav-tabs" >
+                        <li id="tab1" class="active"><a href="#tab01" data-toggle="tab">Parte 1</a></li>
+                        <li id="tab2"><a href="#tab02" data-toggle="tab">Parte 2</a></li>
+                        <li id="tab3"><a href="#tab03" data-toggle="tab">Parte 3</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <!-- Início do conteudo da tab01 -->
+                        <div role="tabpanel" class="tab-pane active" id="tab01">
+                          <p>Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1 - Conteúdo da parte 1</p>
+
+                          <div style="float:right">
+                            <button type="button" class="btn btn-default navbar-btn" id='avancar' 
+                            onclick="avancar()">Avançar</button>
+
+                        </div>
+                        
+                        </div>
+
+                        <!-- Início do conteudo da tab02 -->
+                        <div role="tabpanel" class="tab-pane" id="tab02">
+                          <p>Conteúdo da parte  2 - Conteúdo da parte  2  - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2Conteúdo da parte  2 - Conteúdo da parte  2  - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2 - Conteúdo da parte  2</p>
+                          
+                          <div style="float:right">
+                            <button type="button" class="btn btn-default navbar-btn" 
+                            id='avancar' onclick="avancar()">Avançar</button>
+
+                        </div>
+
+                        <div style="float:left">
+                            <button type="button" class="btn btn-default navbar-btn" n
+                            id='voltar' onclick="voltar()">Voltar</button>
+                        </div>
+                        </div>
+
+                        <!-- Início do conteudo da tab03 -->
+                        <div role="tabpanel" class="tab-pane" id="tab03">
+                           <p>Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3 - Conteúdo da parte 3</p>
 
 
+                        <div style="float:left">
+                            <button type="button" class="btn btn-default navbar-btn" n
+                            id='voltar' onclick="voltar()">Voltar</button>
+                        </div>
+                           
+                        </div>
 
+                    </div> <!-- FIM div tab-content -->
+
+
+                </div>  <!-- FIM div navegacao -->
+
+
+            </div> <!-- FIM div span-->
+        </div> <!-- FIM div container -->
+  
+ 
+            
+  
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+ 
+
+
+  </body>
+</html>
